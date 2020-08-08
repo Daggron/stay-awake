@@ -1,0 +1,35 @@
+{
+  "name": "stayawak",
+  "version": "1.0.0",
+  "description": "a simple app to keep the heroku free server always awake",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js",
+    "dev": "nodemon server.js && nodemon services/index.js"
+  },
+  "keywords": [
+    "heroku",
+    "awake",
+    "no",
+    "sleep",
+    "heroku",
+    "up",
+    "always",
+    "up"
+  ],
+  "author": "Abhay Sharma",
+  "license": "ISC",
+  "dependencies": {
+    "axios": "^0.19.2",
+    "cors": "^2.8.5",
+    "express": "^4.17.1",
+    "mongoose": "^5.9.28",
+    "node-cron": "^2.0.3",
+    "node-fetch": "^2.6.0",
+    "node-redis": "^0.1.7"
+  },
+  "devDependencies": {
+    "nodemon": "^2.0.4"
+  }
+}
