@@ -42,7 +42,7 @@ export default {
         },
         onSubmit() {
             console.log('called');
-            Axios.post('http://localhost:5000/post',{
+            Axios.post('/post',{
                 url: this.url,
             })
             .then(({data}) => {
