@@ -2,7 +2,7 @@ const cronJob = require('node-cron');
 const fetch = require('./task');
 
 function scheduler() {
-    cronJob.schedule('* * * * *', () => {
+    cronJob.schedule('*/30 * * * *', () => {
         console.log('called');
         fetch();
     });    
