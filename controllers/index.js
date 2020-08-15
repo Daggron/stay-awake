@@ -1,9 +1,11 @@
 const App = require('../models/model');
 
 exports.postUrl = async (req, res) => {
-    const { name, url } = req.body;
+    let { url } = req.body;
+    if (!url.includes('http://' || 'https://') ) {
+       url = `https://${url}`;
+    }
     const app = new App({
-        name,
         url,
     });
 
@@ -25,7 +27,7 @@ exports.postUrl = async (req, res) => {
 
 exports.getAll = async (req, res) => {
     App.find({})
-    .select('_id url name')
+    .select('_id url')
     .sort({
         name: 1,
     })

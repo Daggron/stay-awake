@@ -1,18 +1,21 @@
 <template>
     <div class="form">
-        <input
-          type="text"
-          v-model="name"
-          placeholder="Enter name here"
-          class="name-input"
+        <Dialouge
+          :isOpen="isOpen"
+          :url="url"
+          :closeModal="closeModal"
+          :success="success"
         />
-        <input
-          type="text"
-          v-model="url"
-          placeholder="Enter url here"
-          class="url-input"
-        />
-        <button @click="onSubmit">
+        <div class="form-input">
+            https://
+            <input
+            type="text"
+            v-model="url"
+            placeholder="sucourses.herokuapp.com"
+            class="url-input"
+            />
+        </div>
+        <button class="submit" @click="onSubmit">
             Submit
         </button>
     </div>
@@ -20,32 +23,44 @@
 
 <script>
 import Axios from 'axios';
+import Dialouge from './Dialouge';
 export default {
     name: 'Form',
+    components: {
+        Dialouge,
+    },
     data() {
         return {
-            name: '',
             url: '',
+            isOpen: false,
+            success: false,
         }
     },
     methods: {
-        setName(e) {
-            this.name = e.target.value;
-        },
         setUrl(e) {
             this.url = e.target.value;
         },
         onSubmit() {
+            console.log('called');
             Axios.post('http://localhost:5000/post',{
-                name: this.name,
                 url: this.url,
             })
             .then(({data}) => {
                 console.log(data);
+                 this.isOpen = true;
+                 this.success = data.success;
             })
             .catch(err =>{
                 console.error(err);
+                this.success = false;
             })
+            .finally(() => {
+                this.isOpen = true;
+            })
+            ;
+        },
+        closeModal() {
+            this.isOpen = false;
         }
     }
 }
@@ -54,13 +69,17 @@ export default {
 <style scoped>
 .form {
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   align-items: center;
   flex-direction: column;
 }
 
 .form > * {
     margin-bottom: 12px;
+}
+
+.form-input {
+    color: #42b883;
 }
 
 input[type='text'] {
@@ -70,5 +89,15 @@ input[type='text'] {
     box-shadow: 0 0 8px 0 rgba(0,0,0,0.2);
     border-radius: 4px;
     outline: rgb(0, 95, 204);
+    margin-left: 4px;
+}
+
+.submit {
+    border: none;
+    outline: none;
+    height: 50px;
+    width: 200px;
+    box-shadow: 0 0 15px 5px rgba(0,0,0,0.15);
+    cursor: pointer;
 }
 </style>
