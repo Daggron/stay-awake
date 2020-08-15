@@ -15,3 +15,5 @@ Techstack used
 - Node js (For Backend)
 - node-cron (for cronjobs)
 - mongodb (For Database)
+
+The Project is live [Here](https://facemash.live)
